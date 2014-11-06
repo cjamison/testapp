@@ -5,7 +5,7 @@ set :application, 'testapp'
 set :repo_url, 'git@github.com:cjamison/testapp.git'
 set :deploy_to, '/opt/www/testapp'
 set :user, 'deploy'
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets}
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
