@@ -1,11 +1,8 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'testapp'
-set :repo_url, 'git@github.com:cjamison/testapp.git'
-set :deploy_to, '/opt/www/testapp'
-set :user, 'deploy'
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets}
+set :application, 'my_app_name'
+set :repo_url, 'git@example.com:me/my_repo.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -39,12 +36,11 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets}
 
 namespace :deploy do
 
-  %w[start stop restart].each do |command|
-    desc 'Manage Unicorn'
-    task command do
-      on roles(:app), in: :sequence, wait: 1 do
-        execute "/etc/init.d/unicorn_#{fetch(:application)} #{command}"
-      end      
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
